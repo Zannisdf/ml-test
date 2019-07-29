@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { Container } from "styled-bootstrap-grid";
 
 import { brand } from "../../assets/styles/colors";
 
-const StyledContainer = styled(Container)`
+const Container = styled.div`
   padding: 16px 0;
   font-size: 14px;
 `;
@@ -30,13 +29,13 @@ const Category = styled.a`
 `;
 
 const Breadcrumb = ({ categories = [] }) => (
-  <StyledContainer>
+  <Container>
     {categories.map((category, index) => (
       <Category key={`${category}_${index}`} href="https://mercadolibre.com">
         {category}
       </Category>
     ))}
-  </StyledContainer>
+  </Container>
 );
 
 Breadcrumb.propTypes = {

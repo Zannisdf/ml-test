@@ -4,7 +4,7 @@ export const brand = {
   darkGray: "#666666",
   gray: "#999999",
   lightGray: "#eeeeee",
-  white: "ffffff"
+  white: "#ffffff"
 };
 export const buttons = {
   primary: "#3483fa"
