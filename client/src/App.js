@@ -1,6 +1,15 @@
 import React from "react";
-import SearchBox from "./views/SearchBox";
+import { BaseCSS } from "styled-bootstrap-grid";
 
-const App = () => <SearchBox />;
+import SearchBox from "./views/SearchBox";
+import GlobalStyle from "./assets/styles/globalStyles";
+
+const App = () => (
+  <>
+    <BaseCSS />
+    <GlobalStyle />
+    <SearchBox />
+  </>
+);
 
 export default App;
