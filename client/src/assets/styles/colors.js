@@ -3,7 +3,8 @@ export const brand = {
   black: "#333333",
   darkGray: "#666666",
   gray: "#999999",
-  lightGray: "#eeeeee"
+  lightGray: "#eeeeee",
+  white: "#ffffff"
 };
 export const buttons = {
   primary: "#3483fa"
