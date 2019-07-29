@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { withRouter } from "react-router-dom";
 import { Container, Row, Col } from "styled-bootstrap-grid";
 
 import logo from "../../assets/images/Logo_ML@2x.png";
@@ -48,8 +49,9 @@ const SearchIcon = styled.img`
   line-height: 100%;
 `;
 
-const Navbar = () => {
-  const ENDPOINT = "/api/items?q=";
+const Navbar = ({ history }) => {
+  const BASE_URL = "/items";
+  const name = "search";
   const placeholder = "Nunca dejes de buscar";
   const [value, setValue] = useState("");
 
@@ -60,11 +62,10 @@ const Navbar = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    e.persist();
-
     const query = encodeURI(value);
-    const req = ENDPOINT + query;
-    // fetch and redirect
+    const params = `${name}=${query}`;
+    const redirectionPath = `${BASE_URL}?${params}`;
+    history.push(redirectionPath);
   };
 
   return (
@@ -79,7 +80,7 @@ const Navbar = () => {
               <Input
                 type="text"
                 placeholder={placeholder}
-                name="search"
+                name={name}
                 value={value}
                 onChange={e => handleChange(e)}
               />
@@ -94,4 +95,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);
