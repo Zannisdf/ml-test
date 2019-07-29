@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Container, Row, Col } from "styled-bootstrap-grid";
 
 import logo from "../../assets/images/Logo_ML@2x.png";
 import glassIcon from "../../assets/images/ic_Search.png";
 import { brand } from "../../assets/styles/colors";
+
+const fontSize = "18px";
 
 const Nav = styled.nav`
   width: 100%;
@@ -25,7 +27,7 @@ const Logo = styled.img`
 `;
 const Input = styled.input`
   height: 100%;
-  font-size: 18px;
+  font-size: ${fontSize};
   color: #333;
   flex-grow: 1;
   padding: 0 10px;
@@ -42,22 +44,45 @@ const Button = styled.button`
   padding: 0 12px;
 `;
 const SearchIcon = styled.img`
-  height: 18px;
+  height: ${fontSize};
   line-height: 100%;
 `;
 
 const Navbar = () => {
+  const ENDPOINT = "/api/items?q=";
   const placeholder = "Nunca dejes de buscar";
+  const [value, setValue] = useState("");
+
+  const handleChange = e => {
+    e.persist();
+    setValue(e.target.value);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    e.persist();
+
+    const query = encodeURI(value);
+    const req = ENDPOINT + query;
+    // fetch and redirect
+  };
+
   return (
     <Nav>
       <Container>
-        <form>
+        <form onSubmit={e => handleSubmit(e)}>
           <Row>
             <FlexCol col={1} offset={1}>
               <Logo src={logo} alt="" />
             </FlexCol>
             <FlexCol col={9}>
-              <Input type="text" placeholder={placeholder} />
+              <Input
+                type="text"
+                placeholder={placeholder}
+                name="search"
+                value={value}
+                onChange={e => handleChange(e)}
+              />
               <Button type="submit">
                 <SearchIcon src={glassIcon} alt="Search" />
               </Button>
