@@ -7,5 +7,6 @@ export const brand = {
   white: "#ffffff"
 };
 export const buttons = {
-  primary: "#3483fa"
+  primary: "#3483fa",
+  defaultTextColor: "#ffffff"
 };

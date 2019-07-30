@@ -6,9 +6,9 @@ import ContentWrapper from "./ContentWrapper";
 
 const Layout = ({ children, categories }) => (
   <Container>
-    <Breadcrumb categories={categories} />
     <Row>
       <Col col={10} offset={1}>
+        <Breadcrumb categories={categories} />
         <ContentWrapper>{children}</ContentWrapper>
       </Col>
     </Row>
