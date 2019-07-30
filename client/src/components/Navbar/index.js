@@ -6,6 +6,7 @@ import { Container, Row, Col } from "styled-bootstrap-grid";
 import logo from "../../assets/images/Logo_ML@2x.png";
 import glassIcon from "../../assets/images/ic_Search.png";
 import { brand } from "../../assets/styles/colors";
+import breakpoints from "../../assets/styles/breakpoints";
 
 const fontSize = "18px";
 
@@ -23,11 +24,16 @@ const FlexCol = styled(Col)`
   }
 `;
 const Logo = styled.img`
-  height: 34px;
+  height: 32px;
+  padding-right: 15px;
   width: auto;
+  @media screen and (min-width: ${breakpoints.xl}) {
+    height: 34px;
+  }
 `;
 const Input = styled.input`
   height: 100%;
+  min-width: 100px;
   font-size: ${fontSize};
   color: #333;
   flex-grow: 1;
@@ -35,6 +41,8 @@ const Input = styled.input`
   border-color: transparent;
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const Button = styled.button`
   height: 100%;
@@ -73,10 +81,8 @@ const Navbar = ({ history }) => {
       <Container>
         <form onSubmit={e => handleSubmit(e)}>
           <Row>
-            <FlexCol col={1} offset={1}>
+            <FlexCol col={12} lg={10} lgOffset={1}>
               <Logo src={logo} alt="" />
-            </FlexCol>
-            <FlexCol col={9}>
               <Input
                 type="text"
                 placeholder={placeholder}

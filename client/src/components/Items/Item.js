@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import freeShippingLogo from "../../assets/images/ic_shipping.png";
 import { Link } from "react-router-dom";
 import { brand } from "../../assets/styles/colors";
+import breakpoints from "../../assets/styles/breakpoints";
 
 const Container = styled.div`
   display: flex;
@@ -16,11 +17,15 @@ const Container = styled.div`
   }
 `;
 const Img = styled.img`
-  height: 180px;
-  width: 180px;
   border-radius: 4px;
   margin-right: 16px;
   display: block;
+  width: 108px;
+  height: 108px;
+  @media screen and (min-width: ${breakpoints.md}) {
+    height: 180px;
+    width: 180px;
+  }
 `;
 const Main = styled.div`
   color: ${brand.black};
@@ -28,9 +33,12 @@ const Main = styled.div`
 `;
 const PriceContainer = styled.div`
   padding: 16px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  display: block;
+  @media screen and (min-width: ${breakpoints.md}) {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
 `;
 const Price = styled.div`
   font-size: 24px;
@@ -39,6 +47,8 @@ const Title = styled(Link)`
   font-size: 18px;
   text-decoration: none;
   color: ${brand.black};
+  display: block;
+  max-width: 80%;
 `;
 const Condition = styled.div`
   width: 20%;

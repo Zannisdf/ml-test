@@ -2,19 +2,22 @@ import React from "react";
 import styled from "styled-components";
 
 import { brand } from "../../assets/styles/colors";
+import breakpoints from "../../assets/styles/breakpoints";
 import Button from "../shared/Button";
 
 const Wrapper = styled.div`
-  display: flex;
+  display: block;
   > img {
-    flex-basis: 680px;
-    flex-shrink: 0;
-    flex-grow: 0;
     width: 100%;
     height: auto;
   }
-  @media screen and (max-width: 1199px) {
-    display: block;
+  @media screen and (min-width: ${breakpoints.xl}) {
+    display: flex;
+    > img {
+      flex-basis: 680px;
+      flex-shrink: 0;
+      flex-grow: 0;
+    }
   }
 `;
 const Details = styled.div`
