@@ -1,9 +1,9 @@
 import React from "react";
 
 import { Container, Row, Col } from "styled-bootstrap-grid";
-import Breadcrumb from "../../components/Breadcrumb";
-import ResultsContainer from "../../components/ResultsContainer";
-import Item from "../../components/Item";
+import Breadcrumb from "../Breadcrumb";
+import ResultsContainer from "../ResultsContainer";
+import Item from "../Item";
 
 const View = ({ items, categories }) => (
   <Container>

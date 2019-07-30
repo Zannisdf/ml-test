@@ -4,8 +4,9 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import GlobalStyle from "./assets/styles/globalStyles";
-import SearchBox from "./views/SearchBox";
-import Items from "./views/Items";
+import SearchBox from "./components/SearchBox";
+import ItemDetails from "./components/ItemDetails";
+import Items from "./components/SearchResults";
 
 const App = () => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ const App = () => (
     <Navbar />
     <Switch>
       <Route exact path="/" component={SearchBox} />
+      <Route path="/items/:id" component={ItemDetails} />
       <Route path="/items" component={Items} />
     </Switch>
   </BrowserRouter>
