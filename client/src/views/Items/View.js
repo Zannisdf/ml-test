@@ -1,27 +1,20 @@
 import React from "react";
-import styled from "styled-components";
-
-import { brand } from "../../assets/styles/colors";
 
 import { Container, Row, Col } from "styled-bootstrap-grid";
 import Breadcrumb from "../../components/Breadcrumb";
+import ResultsContainer from "../../components/ResultsContainer";
 import Item from "../../components/Item";
 
-const Main = styled.div`
-  background-color: ${brand.white};
-  border-radius: 4px;
-`;
-
-const View = ({ items }) => (
+const View = ({ items, categories }) => (
   <Container>
     <Row>
       <Col col={10} offset={1}>
-        <Breadcrumb categories={["asdf", "qwerty"]} />
-        <Main>
+        <Breadcrumb categories={categories} />
+        <ResultsContainer>
           {items.map(item => (
             <Item key={item.id} details={item} />
           ))}
-        </Main>
+        </ResultsContainer>
       </Col>
     </Row>
   </Container>

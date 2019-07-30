@@ -5,6 +5,7 @@ import View from "./View";
 const Items = ({ location }) => {
   const params = new URLSearchParams(location.search);
   const [items, setItems] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     setItems([
@@ -37,7 +38,11 @@ const Items = ({ location }) => {
     ]);
   }, []);
 
-  return <View items={items} />;
+  useEffect(() => {
+    setCategories(["cat1", "cat2"]);
+  }, []);
+
+  return <View items={items} categories={categories} />;
 };
 
 export default Items;
