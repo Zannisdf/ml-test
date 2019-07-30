@@ -7,13 +7,18 @@ import Button from "../shared/Button";
 const Wrapper = styled.div`
   display: flex;
   > img {
-    display: block;
-    width: 680px;
+    flex-basis: 680px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    width: 100%;
     height: auto;
+  }
+  @media screen and (max-width: 1199px) {
+    display: block;
   }
 `;
 const Details = styled.div`
-  width: calc(100% - 680px);
+  width: auto;
   color: ${brand.black};
 `;
 const Status = styled.span`
