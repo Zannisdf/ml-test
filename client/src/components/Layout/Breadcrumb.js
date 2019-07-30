@@ -7,33 +7,31 @@ import { brand } from "../../assets/styles/colors";
 const Container = styled.div`
   padding: 16px 0;
   font-size: 14px;
+  color: ${brand.gray};
+  > span {
+    > a {
+      margin: 0 10px;
+    }
+    &:first-child > a {
+      margin-left: 0;
+    }
+  }
 `;
 const Category = styled.a`
-  position: relative;
-  margin-right: 20px;
   color: ${brand.gray};
   text-decoration: none;
-
-  &:before {
-    content: ">";
-    position: absolute;
-    right: -15px;
-  }
-  &:last-child {
-    font-weight: bold;
-
-    &:before {
-      content: "";
-    }
+  &:hover {
+    color: ${brand.black};
   }
 `;
 
 const Breadcrumb = ({ categories = [] }) => (
   <Container>
     {categories.map((category, index) => (
-      <Category key={`${category}_${index}`} href="https://mercadolibre.com">
-        {category}
-      </Category>
+      <span key={`${category}_${index}`}>
+        <Category href="https://mercadolibre.com">{category}</Category>
+        {index !== categories.length - 1 && ">"}
+      </span>
     ))}
   </Container>
 );
