@@ -5,8 +5,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import GlobalStyle from "./assets/styles/globalStyles";
 import SearchBox from "./components/SearchBox";
-import ItemDetails from "./components/ItemDetails";
-import Items from "./components/SearchResults";
+import Item from "./components/Item";
+import Items from "./components/Items";
 
 const App = () => (
   <BrowserRouter>
@@ -15,7 +15,7 @@ const App = () => (
     <Navbar />
     <Switch>
       <Route exact path="/" component={SearchBox} />
-      <Route path="/items/:id" component={ItemDetails} />
+      <Route path="/items/:id" component={Item} />
       <Route path="/items" component={Items} />
     </Switch>
   </BrowserRouter>
