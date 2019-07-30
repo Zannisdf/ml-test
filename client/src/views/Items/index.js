@@ -1,17 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 
-import { brand } from "../assets/styles/colors";
-
-import { Container, Row, Col } from "styled-bootstrap-grid";
-import WithNavbar from "./layouts/WithNavbar";
-import Breadcrumb from "../components/Breadcrumb";
-import Item from "../components/Item";
-
-const Main = styled.div`
-  background-color: ${brand.white};
-  border-radius: 4px;
-`;
+import View from "./View";
 
 const Items = ({ location }) => {
   const params = new URLSearchParams(location.search);
@@ -48,22 +37,7 @@ const Items = ({ location }) => {
     ]);
   }, []);
 
-  return (
-    <WithNavbar>
-      <Container>
-        <Row>
-          <Col col={10} offset={1}>
-            <Breadcrumb categories={["asdf", "qwerty"]} />
-            <Main>
-              {items.map(item => (
-                <Item key={item.id} details={item} />
-              ))}
-            </Main>
-          </Col>
-        </Row>
-      </Container>
-    </WithNavbar>
-  );
+  return <View items={items} />;
 };
 
 export default Items;
