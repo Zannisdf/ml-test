@@ -1,5 +1,5 @@
 const express = require("express");
-const errors = require("./utils/errors");
+const { handleError, notFound } = require("./utils/errors");
 const itemsRoutes = require("./routes/items");
 const bodyParser = require("body-parser");
 
@@ -9,6 +9,11 @@ app.use(bodyParser.json());
 
 app.use("/api/items", itemsRoutes);
 
-app.use(errors.serverError);
+app.use("/", (req, res, next) => {
+  notFound();
+  next();
+});
+
+app.use(handleError);
 
 app.listen(8080);

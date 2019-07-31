@@ -8,6 +8,16 @@ exports.getItems = async (req, res, next) => {
   if (err) {
     next(err);
   } else {
-    res.status(200).send(items);
+    res.status(200).json(items);
+  }
+};
+
+exports.getItem = async (req, res, next) => {
+  const id = req.params.id;
+  const [err, item] = await mercadoLibre.getItem(id);
+  if (err) {
+    next(err);
+  } else {
+    res.status(200).json(item);
   }
 };

@@ -3,11 +3,16 @@ const errors = require("../utils/errors");
 
 // Throws a custom error if the request fails
 const checkStatus = req => {
+  const error = new Error();
   if (req.status >= 200 && req.status < 300) {
     return;
+  } else if (req.status >= 400 && req.status < 500) {
+    error.message = "Resource not found";
   } else {
-    throw new Error("Bad request");
+    error.message = "Bad Request";
   }
+  error.code = req.status;
+  throw error;
 };
 
 // Returns the most common category id in a group of raw items.
@@ -66,14 +71,32 @@ const getPrice = async (amount, currencyID) => {
   };
 };
 
+const getDescription = async id => {
+  const ENDPOINT = "https://api.mercadolibre.com/items/";
+  const SUFFIX = "/description";
+  const response = await fetch(ENDPOINT + id + SUFFIX);
+  checkStatus(response);
+  const parsedResponse = await response.json();
+  return parsedResponse.plain_text;
+};
+
 // JSON response from the api call with error handling.
 const fetchItemsFromQuery = async query => {
   const ENDPOINT = "https://api.mercadolibre.com/sites/MLA/search?q=";
-  const urlWithQuery = ENDPOINT + query;
+  const urlWithQuery = ENDPOINT + (query || "");
   const response = await fetch(urlWithQuery);
   checkStatus(response);
   const parsedResponse = await response.json();
   return parsedResponse.results;
+};
+
+const fetchItemFromID = async id => {
+  const ENDPOINT = "https://api.mercadolibre.com/items/";
+  const url = ENDPOINT + id;
+  const response = await fetch(url);
+  checkStatus(response);
+  const parsedResponse = await response.json();
+  return parsedResponse;
 };
 
 // Takes a raw item and returns an object with the desired output format.
@@ -93,6 +116,24 @@ const parse = async ({
   condition: getCondition(attributes),
   free_shipping
 });
+
+exports.getItem = async itemID => {
+  let result;
+  let err;
+  try {
+    const rawItem = await fetchItemFromID(itemID);
+    const description = await getDescription(itemID);
+    const parsedItem = await parse(rawItem);
+    result = {
+      ...parsedItem,
+      sold_quantity: rawItem.sold_quantity,
+      description
+    };
+  } catch (error) {
+    err = error;
+  }
+  return [err, result];
+};
 
 exports.getItems = async (query, author, limit) => {
   let err;
