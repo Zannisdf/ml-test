@@ -14,15 +14,11 @@ const Wrapper = styled.div`
   }
   @media screen and (min-width: ${breakpoints.xl}) {
     display: flex;
-    > img {
-      flex-basis: 680px;
-      flex-shrink: 0;
-      flex-grow: 0;
-    }
   }
 `;
 const Details = styled.div`
-  width: auto;
+  width: 30%;
+  margin-left: 16px;
   color: ${brand.black};
 `;
 const Status = styled.span`
