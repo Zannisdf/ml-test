@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     color: ${brand.black};
     background-color: ${brand.lightGray};
+    font-family: Helvetica,Arial,sans-serif;
   }
 `;
 

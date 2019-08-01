@@ -24,7 +24,7 @@ const Layout = ({ title, children, categories, breadcrumb = true }) => (
 
 Layout.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.element,
+  children: PropTypes.any,
   categories: PropTypes.array,
   breadcrumb: PropTypes.bool
 };
