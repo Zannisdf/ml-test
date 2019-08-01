@@ -1,23 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import { LOADING, OK, ERROR } from "../../utils/loadStatus";
+
 import View from "./View";
 
-const Item = () => {
-  const categories = ["cat1", "cat2"];
-  const item = {
-    id: "MLA617433612",
-    title: "Transformador Electronico 220/110v 2000w Carga Electronissi",
-    price: {
-      currency: "$",
-      amount: 650,
-      decimals: 2
-    },
-    picture: "http://mla-s1-p.mlstatic.com/680214-MLA31044900159_062019-I.jpg",
-    condition: "new",
-    free_shipping: true,
-    sold_quantity: 0,
-    description: "This is the description"
-  };
+const Item = ({ match }) => {
+  const ENDPOINT = "/api/items/";
+  const [item, setItem] = useState({});
+  const [status, setStatus] = useState(LOADING);
 
-  return <View categories={categories} item={item} />;
+  useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+    const { id } = match.params;
+
+    const fetchItem = async id => {
+      try {
+        const response = await fetch(ENDPOINT + id, {
+          method: "GET",
+          signal
+        });
+        const itemData = await response.json();
+
+        setItem(itemData);
+        setStatus(response.status >= 200 && response.status < 300 ? OK : ERROR);
+      } catch (err) {
+        console.log(err.name === "AbortError" ? "Fetch aborted" : err);
+      }
+    };
+
+    fetchItem(id);
+    return () => controller.abort();
+  }, [match.params]);
+
+  return <View status={status} categories={item.categories} item={item} />;
 };
 export default Item;

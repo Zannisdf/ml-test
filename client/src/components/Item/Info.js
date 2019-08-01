@@ -39,19 +39,29 @@ const Price = styled.span`
 `;
 
 const Info = ({
-  item: { title, price, picture, condition, sold_quantity }
-}) => (
-  <Wrapper>
-    <img src={picture} alt="Producto" />
-    <Details>
-      <Status>
-        {condition} - {sold_quantity}
-      </Status>
-      <Title>{title}</Title>
-      <Price>{`${price.currency} ${price.amount}`}</Price>
-      <Button primary>Comprar</Button>
-    </Details>
-  </Wrapper>
-);
-
+  item: {
+    title,
+    price: { currency, amount },
+    picture,
+    condition,
+    sold_quantity
+  }
+}) => {
+  const sold = `${sold_quantity} ${
+    sold_quantity === 1 ? "vendido" : "vendidos"
+  }`;
+  return (
+    <Wrapper>
+      <img src={picture} alt="Producto" />
+      <Details>
+        <Status>
+          {condition} - {sold}
+        </Status>
+        <Title>{title}</Title>
+        <Price>{`${currency} ${amount}`}</Price>
+        <Button primary>Comprar</Button>
+      </Details>
+    </Wrapper>
+  );
+};
 export default Info;

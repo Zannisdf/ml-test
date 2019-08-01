@@ -123,8 +123,10 @@ exports.getItem = async itemID => {
   try {
     const rawItem = await fetchItemFromID(itemID);
     const description = await getDescription(itemID);
+    const categories = await getCategoryTree(rawItem.category_id);
     const parsedItem = await parse(rawItem);
     result = {
+      categories,
       ...parsedItem,
       sold_quantity: rawItem.sold_quantity,
       description
