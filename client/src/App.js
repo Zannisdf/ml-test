@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BaseCSS } from "styled-bootstrap-grid";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Helmet from "react-helmet";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Navbar from "./components/Navbar";
+import GlobalStyle from "./assets/styles/globalStyles";
+import SearchBox from "./components/SearchBox";
+import Item from "./components/Item";
+import Items from "./components/Items";
+import NotFound from "./components/NotFound";
+
+const App = () => (
+  <BrowserRouter>
+    <Helmet>
+      <title>Mercado Libre</title>
+    </Helmet>
+    <BaseCSS />
+    <GlobalStyle />
+    <Navbar />
+    <Switch>
+      <Route exact path="/" component={SearchBox} />
+      <Route path="/items/:id" component={Item} />
+      <Route path="/items" component={Items} />
+      <Route component={NotFound} />
+    </Switch>
+  </BrowserRouter>
+);
 
 export default App;
