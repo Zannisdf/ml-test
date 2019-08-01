@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { Container, Row, Col } from "styled-bootstrap-grid";
 
 import logo from "../../assets/images/Logo_ML@2x.png";
@@ -82,7 +82,9 @@ const Navbar = ({ history }) => {
         <form onSubmit={e => handleSubmit(e)}>
           <Row>
             <FlexCol col={12} lg={10} lgOffset={1}>
-              <Logo src={logo} alt="" />
+              <Link to="/">
+                <Logo src={logo} alt="" />
+              </Link>
               <Input
                 type="text"
                 placeholder={placeholder}
