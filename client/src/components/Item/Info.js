@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { brand } from "../../assets/styles/colors";
 import breakpoints from "../../assets/styles/breakpoints";
 import Button from "../shared/Button";
+import useFormattedPrice from "../../utils/useFormattedPrice";
 
 const Wrapper = styled.div`
   display: block;
@@ -39,17 +40,12 @@ const Price = styled.span`
 `;
 
 const Info = ({
-  item: {
-    title,
-    price: { currency, amount },
-    picture,
-    condition,
-    sold_quantity
-  }
+  item: { title, price, picture, condition, sold_quantity }
 }) => {
   const sold = `${sold_quantity} ${
     sold_quantity === 1 ? "vendido" : "vendidos"
   }`;
+  const formattedPrice = useFormattedPrice(price);
   return (
     <Wrapper>
       <img src={picture} alt="Producto" />
@@ -58,7 +54,7 @@ const Info = ({
           {condition} - {sold}
         </Status>
         <Title>{title}</Title>
-        <Price>{`${currency} ${amount}`}</Price>
+        <Price>{formattedPrice}</Price>
         <Button primary>Comprar</Button>
       </Details>
     </Wrapper>

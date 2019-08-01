@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
+import useFormattedPrice from "../../utils/useFormattedPrice";
+
 import freeShippingLogo from "../../assets/images/ic_shipping.png";
 import { Link } from "react-router-dom";
 import { brand } from "../../assets/styles/colors";
@@ -61,6 +63,7 @@ const Item = ({
 }) => {
   const BASE_URL = "/items/";
   const itemDetailPath = BASE_URL + id;
+  const formattedPrice = useFormattedPrice(price);
   return (
     <Container>
       <Link to={itemDetailPath}>
@@ -69,7 +72,7 @@ const Item = ({
       <Main>
         <PriceContainer>
           <Price>
-            {price.amount}{" "}
+            {formattedPrice}{" "}
             {free_shipping && <img src={freeShippingLogo} alt="Envío gratis" />}
           </Price>
           <Condition>{condition}</Condition>

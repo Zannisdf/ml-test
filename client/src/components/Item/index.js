@@ -1,37 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import { LOADING, OK, ERROR } from "../../utils/loadStatus";
+import useExternalResource from "../../utils/useExternalResource";
 
 import View from "./View";
 
 const Item = ({ match }) => {
   const ENDPOINT = "/api/items/";
-  const [item, setItem] = useState({});
-  const [status, setStatus] = useState(LOADING);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-    const { id } = match.params;
-
-    const fetchItem = async id => {
-      try {
-        const response = await fetch(ENDPOINT + id, {
-          method: "GET",
-          signal
-        });
-        const itemData = await response.json();
-
-        setItem(itemData);
-        setStatus(response.status >= 200 && response.status < 300 ? OK : ERROR);
-      } catch (err) {
-        console.log(err.name === "AbortError" ? "Fetch aborted" : err);
-      }
-    };
-
-    fetchItem(id);
-    return () => controller.abort();
-  }, [match.params]);
+  const { id } = match.params;
+  const [item, status] = useExternalResource({}, ENDPOINT + id);
 
   return <View status={status} categories={item.categories} item={item} />;
 };

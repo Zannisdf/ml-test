@@ -66,7 +66,7 @@ const getPrice = async (amount, currencyID) => {
   const currencyDetails = await response.json();
   return {
     amount,
-    currency: currencyDetails.symbol,
+    currency: currencyID,
     decimals: currencyDetails.decimal_places
   };
 };
