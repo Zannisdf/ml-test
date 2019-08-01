@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 
 import { LOADING, OK } from "../../utils/loadStatus";
 
@@ -8,6 +7,7 @@ import Wrapper from "./Wrapper";
 import Info from "./Info";
 import Description from "./Description";
 import { FullscreenSpinner } from "../shared/Spinner";
+import NotFound from "../NotFound";
 
 const View = ({ status, categories, item }) => (
   <>
@@ -24,7 +24,7 @@ const View = ({ status, categories, item }) => (
     ) : status === LOADING ? (
       <FullscreenSpinner />
     ) : (
-      <Redirect to="/404" />
+      <NotFound />
     )}
   </>
 );
