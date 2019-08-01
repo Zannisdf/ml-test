@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { withRouter, Link } from "react-router-dom";
 import { Container, Row, Col } from "styled-bootstrap-grid";
@@ -57,10 +57,12 @@ const SearchIcon = styled.img`
   line-height: 100%;
 `;
 
-const Navbar = ({ history }) => {
+const Navbar = ({ history, location }) => {
   const BASE_URL = "/items";
   const name = "search";
   const placeholder = "Nunca dejes de buscar";
+  const params = new URLSearchParams(location.search);
+  const queryFromUrl = params.get(name);
   const [value, setValue] = useState("");
 
   const handleChange = e => {
@@ -70,11 +72,18 @@ const Navbar = ({ history }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (!value) {
+      return;
+    }
     const query = encodeURI(value);
     const params = `${name}=${query}`;
     const redirectionPath = `${BASE_URL}?${params}`;
     history.push(redirectionPath);
   };
+
+  useEffect(() => {
+    setValue(queryFromUrl ? queryFromUrl : "");
+  }, [queryFromUrl]);
 
   return (
     <Nav>
