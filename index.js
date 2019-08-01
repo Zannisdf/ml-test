@@ -1,8 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const { handleError, notFound } = require("./utils/errors");
+const path = require("path");
+const { handleError } = require("./utils/errors");
 const itemsRoutes = require("./routes/items");
+const port = process.env.PORT || 8080;
 
 const app = express();
 
@@ -12,11 +14,15 @@ app.use(cors());
 
 app.use("/api/items", itemsRoutes);
 
-app.use("/", (req, res, next) => {
-  notFound();
-  next();
-});
+if (process.env.NODE_ENV === "production") {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, "client/build")));
 
+  // Handle React routing, return all requests to React app
+  app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
+}
 app.use(handleError);
 
-app.listen(8080);
+app.listen(port);

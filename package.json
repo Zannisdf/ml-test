@@ -13,7 +13,8 @@
     "node-fetch": "^2.6.0"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
