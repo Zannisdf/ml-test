@@ -7,6 +7,7 @@ import GlobalStyle from "./assets/styles/globalStyles";
 import SearchBox from "./components/SearchBox";
 import Item from "./components/Item";
 import Items from "./components/Items";
+import NotFound from "./components/NotFound";
 
 const App = () => (
   <BrowserRouter>
@@ -17,6 +18,7 @@ const App = () => (
       <Route exact path="/" component={SearchBox} />
       <Route path="/items/:id" component={Item} />
       <Route path="/items" component={Items} />
+      <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
 );
