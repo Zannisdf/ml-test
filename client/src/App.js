@@ -1,6 +1,7 @@
 import React from "react";
 import { BaseCSS } from "styled-bootstrap-grid";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Helmet from "react-helmet";
 
 import Navbar from "./components/Navbar";
 import GlobalStyle from "./assets/styles/globalStyles";
@@ -11,6 +12,9 @@ import NotFound from "./components/NotFound";
 
 const App = () => (
   <BrowserRouter>
+    <Helmet>
+      <title>Mercado Libre</title>
+    </Helmet>
     <BaseCSS />
     <GlobalStyle />
     <Navbar />

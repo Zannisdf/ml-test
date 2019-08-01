@@ -14,7 +14,7 @@ const notice = "Ups! No encontramos lo que estabas buscando.";
 
 const NotFound = () => (
   <Wrapper>
-    <Layout breadcrumb={false}>
+    <Layout title={notice} breadcrumb={false}>
       <ContentWrapper>{notice}</ContentWrapper>
     </Layout>
   </Wrapper>

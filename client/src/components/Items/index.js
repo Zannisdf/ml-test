@@ -12,6 +12,7 @@ const Items = ({ location }) => {
 
   return (
     <View
+      title={query}
       status={status}
       items={results.items}
       categories={results.categories}

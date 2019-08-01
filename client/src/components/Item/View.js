@@ -12,7 +12,7 @@ import NotFound from "../NotFound";
 const View = ({ status, categories, item }) => (
   <>
     {status === OK && item.id !== undefined ? (
-      <Layout categories={categories}>
+      <Layout title={item.title} categories={categories}>
         <Wrapper>
           <Info item={item} />
           <Description

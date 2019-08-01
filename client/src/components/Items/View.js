@@ -7,10 +7,10 @@ import Item from "./Item";
 import { FullscreenSpinner } from "../shared/Spinner";
 import NotFound from "../NotFound";
 
-const View = ({ status, items, categories }) => (
+const View = ({ title, status, items, categories }) => (
   <>
     {status === OK && items.length !== 0 ? (
-      <Layout categories={categories}>
+      <Layout title={title} categories={categories}>
         {items.map(item => (
           <Item key={item.id} details={item} />
         ))}

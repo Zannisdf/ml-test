@@ -12,7 +12,8 @@ const Title = styled.h2`
 const Body = styled.p`
   font-size: 16px;
   color: ${brand.darkGray};
-  white-space: pre;
+  white-space: pre-wrap;
+  overflow: hidden;
 `;
 
 const Description = ({ title, text }) => (
